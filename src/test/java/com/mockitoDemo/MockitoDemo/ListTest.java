@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
+//BDDMockito - Behevior Driven Development Mockito
 
 import java.util.List;
 
@@ -39,6 +41,14 @@ class ListTest {
 		List<String> list = mock(List.class);
 		when(list.get(anyInt())).thenReturn("Hello");
 		assertEquals("Hello", list.get(0));
+		assertEquals("Hello",list.get(1));
+	}
+	
+	@Test
+	public void bddAliases_UsingGivenWillReturn() {
+		List<String> list = mock(List.class);
+		given(list.get(anyInt())).willReturn("Hello");	
+		assertEquals("Hello",list.get(0));
 		assertEquals("Hello",list.get(1));
 	}
 }
