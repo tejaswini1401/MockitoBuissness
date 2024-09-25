@@ -29,12 +29,16 @@ class ListTest {
 	}
 	
 	@Test
-	public void letsMockListGet() {
-		List<String> list = mock(List.class);
-		when(list.get(0)).thenReturn("Hello");
-		assertEquals("Hello",list.get(0));
-		assertNull(list.get(1));
-	}
+    public void letsMockListGetToThrowException() {
+        List<String> list = mock(List.class); 
+        when(list.get(anyInt())).thenThrow(new RuntimeException("Something went wrong"));
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            list.get(0); 
+        });
+
+        assertEquals("Something went wrong", exception.getMessage());
+    }
 	
 	@Test
 	public void letsMockListGetWithAny() {
